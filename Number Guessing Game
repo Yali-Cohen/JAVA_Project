@@ -1,0 +1,53 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    boolean b = true;
+    int num_guess;
+    int min = 1;
+    int max = 100;
+    int random_int;
+    String play_again;
+
+    Main(){
+        Random random = new Random();
+        random_int = random.nextInt(max - min + 1) + min;
+
+        do {
+            Scanner s = new Scanner(System.in);
+            System.out.println("Let's play a number guessing game");
+            System.out.println("--------------------------------");
+            System.out.println("Guess a number between 1-100: ");
+            num_guess = Integer.parseInt(s.nextLine());
+
+            while (num_guess != random_int){
+                if (num_guess > random_int) {
+                    System.out.println("Your number guess is too high");
+                } else if (num_guess < random_int) {
+                    System.out.println("Your number guess is too low");
+                }
+                System.out.println("Guess a number between 1-100: ");
+                num_guess = Integer.parseInt(s.nextLine());
+            }
+
+            System.out.println("You've guessed the number correctly! Well done!");
+            Scanner s1 = new Scanner(System.in);
+            System.out.println("Do you want to play again? (Y/N)");
+            play_again = s.nextLine().toUpperCase();
+
+            if (play_again.equals("Y")) {
+                b = true;
+                random_int = random.nextInt(max - min + 1) + min; // Generate a new random number
+            } else if (play_again.equals("N")) {
+                b = false;
+                System.out.println("Thank you for playing the number guessing game!");
+            } else {
+                System.out.println("Please enter Y/N");
+            }
+        } while (b);
+    }
+
+    public static void main(String[] args) {
+        new Main();
+    }
+}
